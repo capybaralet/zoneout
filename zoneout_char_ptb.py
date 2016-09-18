@@ -58,15 +58,21 @@ def learning_algorithm(args):
         clipping = StepClipping(threshold=np.cast[floatX](clipping_threshold))
         rms_prop = RMSProp(learning_rate=learning_rate)
         step_rule = CompositeRule([clipping, rms_prop])
-    else:
+    elif name == 'momentum':
         clipping = StepClipping(threshold=np.cast[floatX](clipping_threshold))
         sgd_momentum = Momentum(learning_rate=learning_rate, momentum=momentum)
         step_rule = CompositeRule([clipping, sgd_momentum])
+    elif name == 'acceleration':
+        clipping = StepClipping(threshold=np.cast[floatX](clipping_threshold))
+        acc = Acceleration(learning_rate=learning_rate, dynamics_decay_params=[args.acceleration, momentum])
+        step_rule = CompositeRule([clipping, acc])
     return step_rule
 
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Character-level PTB experiment')
+    parser.add_argument('--acceleration', type=float, default=.5)
+    #parser.add_argument('--acc', type=float, default=.5)
     parser.add_argument('--experiment_path', type=str,
                         default='charptb',
                         help='Location for writing results')
@@ -95,7 +101,7 @@ def parse_args():
                         type=float,
                         help='Gradient clipping norm')
     parser.add_argument('--algorithm', choices=['rms_prop', 'adam',
-                                                'adam'],
+                                                'momentum', 'acceleration'],
                         default='adam',
                         help='Optimization algorithm to use')
     parser.add_argument('--patience', type=int,
