@@ -1,12 +1,15 @@
+import os
 import numpy as np
+import theano
+import fuel
 from fuel.datasets import IterableDataset
 from fuel.streams import DataStream
-import theano
 from fuel.transformers import Transformer
-import fuel
+
 floatX = theano.config.floatX
 
-
+# datasets should be stored at this path
+data_path = os.environ['DATA_PATH']
 
 # PTB
 _data_cache = dict()
@@ -14,11 +17,7 @@ _data_cache = dict()
 
 def get_cPTB(which_set):
     if which_set not in _data_cache:
-        try:
-            data = np.load('/data/lisa/data/PennTreebankCorpus/char_level_penntree.npz')
-        except:
-            data = np.load('char_level_penntree.npz')
-        #data = np.load(path)
+        data = np.load(os.path.join(data_path, 'PennTreebankCorpus', 'char_level_penntree.npz')
         # put the entire thing on GPU in one-hot (takes
         # len(self.vocab) * len(self.data) * sizeof(floatX) bytes
         # which is about 1G for the training set and less for the
@@ -30,13 +29,10 @@ def get_cPTB(which_set):
         _data_cache[which_set] = cudandarray(one_hot_data)
     return _data_cache[which_set]
 
+# TODO: fix comments, datapath
 def get_Text8(which_set):
     if which_set not in _data_cache:
-        try:
-            data = np.load('/data/lisa/data/PennTreebankCorpus/char_level_penntree.npz')
-        except:
-            data = np.load('tezt8.npz')
-        #data = np.load(path)
+        data = np.load(os.path.join(data_path, 'wikipedia-text', 'text8', which_set)
         # put the entire thing on GPU in one-hot (takes
         # len(self.vocab) * len(self.data) * sizeof(floatX) bytes
         # which is about 1G for the training set and less for the
@@ -123,7 +119,7 @@ class Text8(fuel.datasets.Dataset):
 class SampleZoneouts(Transformer):
     def __init__(self, data_stream, z_prob_states, z_prob_cells, drop_prob_igates, hidden_dim,
                  is_for_test, **kwargs):
-        super(SampleZoneoutPTB, self).__init__(
+        super(SampleZoneouts, self).__init__(
             data_stream, **kwargs)
         self.z_prob_states = z_prob_states
         self.z_prob_cells = z_prob_cells
@@ -160,6 +156,7 @@ class SampleZoneouts(Transformer):
         return transformed_data
 
 
+# TODO: combine these two functions
 def get_ptb_stream(which_set, batch_size, length, z_prob_states, z_prob_cells, drop_prob_igates,
                    hidden_dim, for_evaluation, num_examples=None,
                    augment=True):

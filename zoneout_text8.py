@@ -39,7 +39,8 @@ from fuel.datasets import IndexableDataset
 from datasets.timit import Timit
 from extensions import SaveLog, SaveParams
 from initialization import NormalizedInitialization, OrthogonalInitialization
-from utils import construct_stream_np, phone_to_phoneme_dict, drops_syntax_help_string
+# TODO: missing!
+from utils import drops_syntax_help_string
 from monitoring import CTCMonitoring, CTCEvaluator
 
 

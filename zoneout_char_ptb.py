@@ -178,12 +178,6 @@ def train(step_rule, layer_size, epochs, seed, experiment_path, initialization, 
     # MAKE STREAMS
     #
     ###########################################
-    rng = np.random.RandomState(seed)
-    stream_args = dict(rng=rng, pool_size=pool_size,
-                       maximum_frames=maximum_frames,
-                       pretrain_alignment=pretrain_alignment,
-                       uniform_alignment=uniform_alignment,
-                       window_features=window_features)
     if share_mask:
         z_prob_cells = z_prob
         # we don't want to actually use these masks, so this is to debug
@@ -191,6 +185,7 @@ def train(step_rule, layer_size, epochs, seed, experiment_path, initialization, 
 
     print '.. initializing iterators'
 
+    z_prob_igates = 0
     train_stream = get_ptb_stream(
         'train', batch_size, seq_len, z_prob_states, z_prob_cells, z_prob_igates, layer_size, False)
     train_stream_evaluation = get_ptb_stream(

@@ -1,0 +1,15 @@
+test all scripts
+
+fix data paths (e.g. for text8)
+rm utils imports
+
+cuda_ndarray 
+
+drops --> zoneouts
+
+test_cost
+
+
+doesn't train! (bpr stuck above 4!)
+
+
