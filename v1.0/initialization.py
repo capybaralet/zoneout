@@ -40,7 +40,7 @@ class IdentityInitialization(NdarrayInitialization):
 
 
 class OrthogonalInitialization(NdarrayInitialization):
-    
+    # Janos Kramar
     def generate(self, rng, shape):
         W = rng.normal(0.0, 1.0, shape)
         #factor = gcd(*W.shape)

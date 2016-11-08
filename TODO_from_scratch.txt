@@ -1,0 +1,21 @@
+
+rm commented code 
+rm useless flags
+rm unused imports
+check dependencies
+
+clean-up utils
+save-dir?
+make sure comments, docstrings are accurate
+
+combine/fix-up test-script?
+
+change zoneout_p to be (1-p)
+data paths
+tensorflow (wordptb)
+merge pMNIST from current repo
+combine and rename utils.py (_DATA)
+Blocks, Fuel, Theano commit hashes
+code for gradient plots
+
+add more comments?

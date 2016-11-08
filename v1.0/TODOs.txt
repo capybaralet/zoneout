@@ -1,5 +1,7 @@
-test all scripts
+test all scripts (x4)
     which ones are / will be in the paper??
+
+add TF wordPTB
 
 fix data paths (e.g. for text8)
 rm utils imports

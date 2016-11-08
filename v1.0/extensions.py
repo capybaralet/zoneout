@@ -1,6 +1,6 @@
 import logging
 import numpy as np
-from blocks.extensions import SimpleExtension, TrainingExtension
+from blocks.extensions import SimpleExtension
 logger = logging.getLogger('main.utils')
 
 
@@ -51,21 +51,3 @@ class SaveParams(SimpleExtension):
             np.savez_compressed(path, **to_save)
         self.main_loop.log.current_row[
             'best_' + self.early_stop_var] = self.best_value
-
-        
-class RollsExtension(TrainingExtension):
-    """ rolls the cell and state activations between epochs so that first batch gets correct initial activations """
-    def __init__(self, shvars):
-        self.shvars = shvars
-    def before_epoch(self):
-        for v in self.shvars:
-            v.set_value(np.roll(v.get_value(), 1, 0))
-
-class LearningRateSchedule(TrainingExtension):
-    """ Starts decreasing learning rate by a rate after a number of epochs """
-    def __init__(self):
-        self.epoch_number = 0
-    def after_epoch(self):
-        self.epoch_number += 1
-        if self.epoch_number > decrease_lr_after_epoch:
-            learning_rate.set_value(learning_rate.get_value()/lr_decay)
