@@ -39,8 +39,6 @@ from fuel.datasets import IndexableDataset
 from datasets.timit import Timit
 from extensions import SaveLog, SaveParams
 from initialization import NormalizedInitialization, OrthogonalInitialization
-# TODO: missing!
-from utils import drops_syntax_help_string
 from monitoring import CTCMonitoring, CTCEvaluator
 
 
@@ -126,23 +124,19 @@ def parse_args():
     parser.add_argument('--drop_prob',
                         type=str,
                         default='1',
-                        help='(for rnn with shared mask and for SRNN/GRU) Despite the name, is the update probability. Sorry.' +
-                        drops_syntax_help_string)
+                        help='(for rnn with shared mask and for SRNN/GRU) Despite the name, is the update probability. Sorry.')
     parser.add_argument('--drop_prob_states',
                         type=float,
                         default=1.0,
-                        help='(for rnn with non-shared mask) Despite the name, is the update probability. Sorry.' +
-                        drops_syntax_help_string)
+                        help='(for rnn with non-shared mask) Despite the name, is the update probability. Sorry.')
     parser.add_argument('--drop_prob_cells',
                         type=float,
                         default=1.0,
-                        help='(for rnn with non-shared mask) Despite the name, is the update probability. Sorry.' +
-                        drops_syntax_help_string)
+                        help='(for rnn with non-shared mask) Despite the name, is the update probability. Sorry.')
     parser.add_argument('--drop_prob_igates',
                         type=float,
                         default=1.0,
-                        help='(for rnn with drop on input gate ala Recurrent dropout without memory loss paper.' +
-                        drops_syntax_help_string)
+                        help='(for rnn with drop on input gate ala Recurrent dropout without memory loss paper.')
     parser.add_argument('--ogates_zoneout', action='store_true',
                         default=False,
                         help='Zone out the output gates reusing the masks from the input gate dropout')

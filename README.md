@@ -2,6 +2,21 @@
 
 This repo contains the code for replicating the results in [Zoneout: Regularizing RNNs by Randomly Preserving Hidden Activations](http://arxiv.org/abs/1606.01305), as well as gists to help implement zoneout in your code (in Theano and Tensorflow).
 
+The scripts which replicate our experiments (with appropriate command line arguments) are:
+```
+zoneout_pmnist.py
+zoneout_char_ptb.py
+zoneout_word_ptb.py
+zoneout_text8.py
+```
+zoneout_seq2seq.py (sorta)
+zoneout_semantic_consistency.py
+zoneout_gradient_propagation.py
+
+
+
+## About Zoneout
+
 Zoneout is a regularizer for RNNs. At each timestep, units have a random probability of maintaining their previous value. This can be seen as [dropout](https://www.cs.toronto.edu/~hinton/absps/JMLRdropout.pdf) using an identity mask instead of zero mask, or like a per-unit version of [stochastic depth](https://arxiv.org/pdf/1603.09382.pdf). 
 
 We set state of the art on character-level Penn Treebank with 1.27 BPC, match state of the art 1.36 BPC on text8, and combine with [recurrent batch normalization](https://arxiv.org/abs/1603.09025) to set state of the art 95.9% accuracy on permuted sequential MNIST. We performed no hyperparameter search to get these results; just used settings/architectures from the previous state-of the art and in some cases searched over zoneout probabilites.

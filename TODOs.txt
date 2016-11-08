@@ -1,15 +1,26 @@
 test all scripts
+    which ones are / will be in the paper??
 
 fix data paths (e.g. for text8)
 rm utils imports
+    what is SampleDropsNPWord ??
 
-cuda_ndarray 
+
+cuda_ndarray:  Theano vesion issue???
+    .//utils_DATA.py:25:        cudandarray = theano.sandbox.cuda.cuda_ndarray.cuda_ndarray.CudaNdarray
+    .//utils_DATA.py:40:        cudandarray = theano.sandbox.cuda.cuda_ndarray.cuda_ndarray.CudaNdarray
+
 
 drops --> zoneouts
+    drops_ --> zoneouts_
 
-test_cost
+test_cost (what's wrong with it???)
 
 
 doesn't train! (bpr stuck above 4!)
+    zoneout_p incorrect?
+
+
+
 
 

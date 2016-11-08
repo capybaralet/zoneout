@@ -40,7 +40,7 @@ from datasets.transformers import Transpose
 from extensions import SaveLog, SaveParams
 from initialization import NormalizedInitialization, OrthogonalInitialization
 # TODO: missing!
-from utils import SampleDropsNPWord, zoneouts_syntax_help_string
+from utils import SampleDropsNPWord
 from theano.compile.nanguardmode import NanGuardMode
 import commands
 

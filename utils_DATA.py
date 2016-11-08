@@ -17,7 +17,7 @@ _data_cache = dict()
 
 def get_cPTB(which_set):
     if which_set not in _data_cache:
-        data = np.load(os.path.join(data_path, 'PennTreebankCorpus', 'char_level_penntree.npz')
+        data = np.load(os.path.join(data_path, 'PennTreebankCorpus', 'char_level_penntree.npz'))
         # put the entire thing on GPU in one-hot (takes
         # len(self.vocab) * len(self.data) * sizeof(floatX) bytes
         # which is about 1G for the training set and less for the
@@ -32,7 +32,7 @@ def get_cPTB(which_set):
 # TODO: fix comments, datapath
 def get_Text8(which_set):
     if which_set not in _data_cache:
-        data = np.load(os.path.join(data_path, 'wikipedia-text', 'text8', which_set)
+        data = np.load(os.path.join(data_path, 'wikipedia-text', 'text8', which_set))
         # put the entire thing on GPU in one-hot (takes
         # len(self.vocab) * len(self.data) * sizeof(floatX) bytes
         # which is about 1G for the training set and less for the
@@ -156,7 +156,7 @@ class SampleZoneouts(Transformer):
         return transformed_data
 
 
-# TODO: combine these two functions
+# TODO: combine these two functions?
 def get_ptb_stream(which_set, batch_size, length, z_prob_states, z_prob_cells, drop_prob_igates,
                    hidden_dim, for_evaluation, num_examples=None,
                    augment=True):
